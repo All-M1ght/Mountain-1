@@ -1,1 +1,16 @@
-<p>mountains works!</p>
+
+<mat-vertical-stepper [linear]="isLinear">
+  <mat-step *ngFor="let mountain of mountains" label="{{mountain.name}} ({{mountain.id+1}}/25)" [stepControl]="basicFormGroup">
+   <form [formGroup]="basicFormGroup">
+    <mat-form-field>
+      <input name="guess" matInput placeholder="guess" formControlName="name" required [(ngModel)]="mountain.guess">
+    </mat-form-field>
+      {{mountain.id}},{{mountain.altitude}}
+     </form>
+    <button mat-button matStepperNext>
+      Next Mountain
+    </button>
+    <button mat-raised-button routerLink="/endpage">I am finished</button>
+  </mat-step>
+
+</mat-vertical-stepper>

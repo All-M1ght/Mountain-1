@@ -24,7 +24,7 @@
 </div>
 
 <!-- Resources -->
-<h2> Before we start, please answer 2 questions for us to know you better! </h2>
+<h2> Before we start, please answer 3 questions for us to know you better! </h2>
 <div>
   <mat-card>
     <mat-card-content>
@@ -32,7 +32,7 @@
 
       <section class="example-section">
         <mat-form-field class="example-margin">
-          <input matInput type="number" placeholder="Age" [(ngModel)]="myAge">
+          <input matInput type="number" placeholder="Age" [(ngModel)]="myAge" required>
         </mat-form-field>
         <h2 class="example-h2">Select your age</h2>
         <mat-slider
@@ -62,10 +62,23 @@
     <div class="example-selected-value">Your knowledge of Mountains is: {{myExpert}}</div>
   </mat-card>
 </div>
+  <div>
+    <mat-card>
+      <mat-card-content>
+        <h2 class="example-h2">3. How many mountains do you know?</h2>
+
+        <section class="example-section">
+          <mat-form-field class="example-margin">
+            <input matInput type="number" placeholder="Number" [(ngModel)]="myMountain" required>
+          </mat-form-field>
+        </section>
+      </mat-card-content>
+    </mat-card>
+  </div>
 
 <div class="example-button-row">
   <h2>Are you ready for all the questions?</h2>
-  <button mat-fab color="primary" routerLink="/mountains" (click)="gotoMountains()" >Yes</button>
+  <button mat-fab color="primary" routerLink="/mountains"  >Yes</button>
 
 
 </div>

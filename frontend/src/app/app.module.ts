@@ -14,12 +14,16 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import { MountainsComponent } from './mountains/mountains.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { MatStepperModule } from "@angular/material";
+import { ReactiveFormsModule} from "@angular/forms";
+import { EndpageComponent } from './endpage/endpage.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MountainsComponent,
-    HomepageComponent
+    HomepageComponent,
+    EndpageComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +36,9 @@ import { HomepageComponent } from './homepage/homepage.component';
     MatInputModule,
     MatRadioModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatStepperModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

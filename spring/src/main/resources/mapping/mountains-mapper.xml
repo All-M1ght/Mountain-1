@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MOUNTAINS">
+
+    <resultMap id="RES_MAP_MOUNTAINS" type="com.web.pojo.record.MountainsRecord">
+        <!--<result property="picFilename" column="pic_filename"/>-->
+        <!--<result property="shopId" column="shop_id"/>-->
+    </resultMap>
+
+    <select id="SELECT_ONE" parameterType="java.lang.Long"
+            resultMap="RES_MAP_MERCHANDISE">
+        SELECT *
+        FROM owner_merchandise
+        WHERE id = #{mId}
+          AND deleted = FALSE
+    </select>
+
+    <select id="SELECT_ALL" parameterType="java.lang.Long" resultMap="RES_MAP_MOUNTAINS">
+        SELECT *
+        FROM mountains
+
+    </select>
+
+
+</mapper>
