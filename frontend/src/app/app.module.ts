@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule} from "@angular/common/http";
 import { MatCardModule} from "@angular/material/card";
 import { MatSliderModule } from "@angular/material/slider";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -17,6 +18,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { MatStepperModule } from "@angular/material";
 import { ReactiveFormsModule} from "@angular/forms";
 import { EndpageComponent } from './endpage/endpage.component';
+import { MatTableModule} from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { EndpageComponent } from './endpage/endpage.component';
     MatIconModule,
     MatButtonModule,
     MatStepperModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -26,9 +26,18 @@ public class MountainsController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "list")
-    public GeneralRes loadAll(){
-        Long id = (MountainsRecord.getId();
+    public GeneralRes loadSome(){
+        try{
 
-        return GeneralRes.builder().data(mountainService.loadAll(id)).build();
-    }
+
+        return GeneralRes.builder().data(mountainService.loadSome()).build();
+    } catch (Throwable t) {
+
+            return GeneralRes.builder()
+                    .success(false)
+                    .message(t.getMessage())
+                    .build();
+      }
+
+}
 }

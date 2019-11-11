@@ -1,16 +1,62 @@
 
-<mat-vertical-stepper [linear]="isLinear">
-  <mat-step *ngFor="let mountain of mountains" label="{{mountain.name}} ({{mountain.id+1}}/25)" [stepControl]="basicFormGroup">
+<div *ngIf="next==true"><mat-vertical-stepper [linear]="isLinear">
+  <mat-step *ngFor="let mountain of mountains" label="{{mountain.name}} ({{mountain.no+1}}/25)" [stepControl]="basicFormGroup">
    <form [formGroup]="basicFormGroup">
+     <p>You can find image at <a href="{{mountain.url}}" target="_blank"> {{mountain.url}}</a></p>
     <mat-form-field>
-      <input name="guess" matInput placeholder="guess" formControlName="name" required [(ngModel)]="mountain.guess">
+      <input name="{{mountain.id}}" matInput placeholder="Your guess" formControlName="name" required [(ngModel)]="mountain.guess">
     </mat-form-field>
-      {{mountain.id}},{{mountain.altitude}}
      </form>
-    <button mat-button matStepperNext>
+    <button mat-button matStepperNext (click)="addData()">
       Next Mountain
     </button>
-    <button mat-raised-button routerLink="/endpage">I am finished</button>
+
   </mat-step>
 
 </mat-vertical-stepper>
+<button mat-raised-button  (click)="guessAll();changeNext()">I am finished</button>
+</div>
+<div *ngIf="next==false">
+  <table mat-table [dataSource]="dataAll"  style="width: 100%">
+    <ng-container matColumnDef="name" style="width: 10%">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="altitude" style="width: 10%">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Altitude</mat-header-cell>
+      <mat-cell *matCellDef="let row" >{{row.altitude}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="url" style="width: 15%">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Link</mat-header-cell>
+      <mat-cell *matCellDef="let row"><a href="{{row.url}}" target="_blank">{{row.url}}</a></mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="guess" style="width: 10%">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Your answer
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" >{{row.guess}}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="color" style="width: 15%">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>WHICH IS</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-button mat-raised-button style="color: greenyellow" *ngIf="row.color==0">close</button>
+        <button mat-button mat-raised-button style="color: red" *ngIf="row.color==1">not close</button>
+
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="info" style="width: 40%">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Introduction</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.info}}
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="['name','altitude','url','guess','color','info']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns:['name','altitude','url','guess','color','info']"></mat-row>
+
+  </table>
+
+</div>

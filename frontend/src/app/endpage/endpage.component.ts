@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import { Mountain} from "../mountains/mountain";
 
 @Component({
   selector: 'app-endpage',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./endpage.component.css']
 })
 export class EndpageComponent implements OnInit {
-
+  @Input() mountain: Mountain;
   constructor() { }
 
   ngOnInit() {
   }
-
+  mountains;
+  test():void{
+    console.log(this.mountain)
+  }
 }

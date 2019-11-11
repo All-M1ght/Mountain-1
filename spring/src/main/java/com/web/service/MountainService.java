@@ -12,8 +12,11 @@ public class MountainService {
     private final MountainsDAO mountainsDAO;
 
     @Autowired
-    public List<MountainsRecord> loadAll(Long id) {
-        return mountainsDAO.loadAll(id);
+    public MountainService(MountainsDAO mountainDAO) {
+        this.mountainsDAO = mountainDAO;
+    }
+    public List<MountainsRecord> loadSome() {
+        return mountainsDAO.loadSome();
     }
 
 }

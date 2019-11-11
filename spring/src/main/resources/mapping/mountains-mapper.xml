@@ -3,23 +3,21 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MOUNTAINS">
-
-    <resultMap id="RES_MAP_MOUNTAINS" type="com.web.pojo.record.MountainsRecord">
-        <!--<result property="picFilename" column="pic_filename"/>-->
-        <!--<result property="shopId" column="shop_id"/>-->
+    <resultMap id="MOUNTAINS" type="com.web.pojo.record.MountainsRecord">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="altitude" column="altitude"/>
+        <result property="url" column="url"/>
+        <result property="info" column="info"/>
     </resultMap>
 
-    <select id="SELECT_ONE" parameterType="java.lang.Long"
-            resultMap="RES_MAP_MERCHANDISE">
-        SELECT *
-        FROM owner_merchandise
-        WHERE id = #{mId}
-          AND deleted = FALSE
-    </select>
 
-    <select id="SELECT_ALL" parameterType="java.lang.Long" resultMap="RES_MAP_MOUNTAINS">
-        SELECT *
-        FROM mountains
+
+
+    <select id="SELECT_SOME" parameterType="java.lang.Long" resultMap="MOUNTAINS">
+      select *
+      from mountains
+      order by rand() LIMIT 3
 
     </select>
 
