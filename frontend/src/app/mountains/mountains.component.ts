@@ -49,7 +49,7 @@ export class MountainsComponent implements OnInit {
           this.mountains[i].no=i;
           console.log(resp.data[i].id);
           this.ids[i]=resp.data[i].id
-        }
+        }//存所有id
         console.log(this.ids);
         this.dataAll.data = resp.data;
         console.log(this.dataAll.data);
@@ -66,9 +66,11 @@ export class MountainsComponent implements OnInit {
   myGuess;
   myID;
   myIP;
+  id;
   addData():void{
 
   }
+  allGuess=[];
   guessAll():void{
     this.myGuess=this.ids[0]+":"+this.mountains[0].guess;
     for( let i=1;i<3;i++){
@@ -84,10 +86,19 @@ export class MountainsComponent implements OnInit {
       this.dataAll.data[i].color=1;
     }
     }
-    this.mountainsService.guessAll(this.myGuess,this.ip).subscribe((resp)=>{
-      console.log(resp)
-    })
+    this.mountainsService.findMe(this.ip).subscribe((resp)=>{
+      console.log(resp.body.data);
+      this.allGuess=resp.body.data;
+      console.log(this.allGuess[this.allGuess.length-1].id);
+      this.id=this.allGuess[this.allGuess.length-1].id;
+      this.mountainsService.guessAll(this.myGuess,this.id).subscribe((resp)=>{
+        console.log(resp)
+      })
+    });
+
   }
+
+
 
 }
 export class DataM{

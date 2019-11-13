@@ -23,6 +23,25 @@ public class UserController {
         this.userService = userService;
     }
 
+    @RequestMapping(method = RequestMethod.POST, path = "create")
+    public GeneralRes createNew(
+            @RequestBody UserRecord record
+    ) {
+        try {
+            this.userService.createNew(record);
+            return GeneralRes.builder().build();
+        }
+        catch (Throwable t) {
+            log.error("createNew", t);
+            return GeneralRes.builder()
+                    .success(false)
+                    .message(t.getMessage())
+                    .build();
+        }
+    }
+
+
+
     @RequestMapping(method = RequestMethod.PUT)
     public GeneralRes edit(
             @RequestBody UserRecord record
@@ -34,6 +53,19 @@ public class UserController {
           return GeneralRes.builder().success(updated).build();
         } catch (Throwable t) {
 
+            return GeneralRes.builder()
+                    .success(false)
+                    .message(t.getMessage())
+                    .build();
+        }
+
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "findme")
+    public GeneralRes findMe(@RequestParam String ip){
+        try{
+            return GeneralRes.builder().data(userService.findMe(ip)).build();
+        } catch (Throwable t) {
             return GeneralRes.builder()
                     .success(false)
                     .message(t.getMessage())

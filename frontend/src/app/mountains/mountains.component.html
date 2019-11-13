@@ -1,8 +1,9 @@
 
 <div *ngIf="next==true"><mat-vertical-stepper [linear]="isLinear">
-  <mat-step *ngFor="let mountain of mountains" label="{{mountain.name}} ({{mountain.no+1}}/25)" [stepControl]="basicFormGroup">
+  <mat-step *ngFor="let mountain of mountains" label="({{mountain.no+1}}/25)" [stepControl]="basicFormGroup">
    <form [formGroup]="basicFormGroup">
-     <p>You can find image at <a href="{{mountain.url}}" target="_blank"> {{mountain.url}}</a></p>
+     <a><img src="http://localhost:8086/static/{{mountain.img}}" alt="" style="width:500px"/></a>
+     <br>
     <mat-form-field>
       <input name="{{mountain.id}}" matInput placeholder="Your guess" formControlName="name" required [(ngModel)]="mountain.guess">
     </mat-form-field>

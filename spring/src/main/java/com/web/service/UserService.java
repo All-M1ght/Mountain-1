@@ -14,13 +14,12 @@ public class UserService {
     @Autowired
     public UserService(UserDAO userDAO) { this.userDAO = userDAO; }
 
-    public void create(UserRecord record) {
+    public void createNew(UserRecord record) {
         userDAO.createNew(record);
     }
     public boolean guess(UserRecord record){
         return 1 == userDAO.guess(record);
     }
-    public void reject(UserRecord record) {
-        userDAO.reject(record);
-    }
+    public void reject(UserRecord record) { userDAO.reject(record); }
+    public List<UserRecord> findMe(String ip) { return userDAO.fineMe(ip); }
 }

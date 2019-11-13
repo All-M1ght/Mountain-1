@@ -19,5 +19,6 @@ export class Mountain{
      url: string;
      info: string;
      guess: number;
+     img: string;
 }
 

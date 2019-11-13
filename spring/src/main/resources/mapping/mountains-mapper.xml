@@ -9,6 +9,7 @@
         <result property="altitude" column="altitude"/>
         <result property="url" column="url"/>
         <result property="info" column="info"/>
+        <result property="img" column="img"/>
     </resultMap>
 
 

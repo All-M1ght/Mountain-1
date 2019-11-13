@@ -20,7 +20,12 @@
     <update id="GUESS" parameterType="com.web.pojo.record.UserRecord">
         UPDATE user
         SET tab=#{tab}
-        WHERE ip = #{ip}
+        WHERE id = #{id}
     </update>
+    <select id="FINDME"  parameterType="com.web.pojo.record.param.ipParam" resultMap="USER">
+        SELECT *
+        FROM user
+        WHERE ip = #{ip}
+    </select>
 
 </mapper>

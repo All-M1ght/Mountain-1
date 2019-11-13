@@ -28,20 +28,22 @@ export class MountainsService {
   getMountains(): Observable<any> {
     return this.http.get("http://localhost:8086/web/mountains/list")
   }
-  guessAll(myGuess:string,myIP:string): Observable<any>{
+  guessAll(myGuess,myID): Observable<any> {
     return this.http.put("http://localhost:8086/web/user",
       {
-        tab:myGuess,
-        ip:myIP},
-      {headers: new HttpHeaders({
+        tab: myGuess,
+        id: myID
+      },
+      {
+        headers: new HttpHeaders({
           'Content-Type': "application/json",
           'Access-Control-Allow-Origin': "*",
-        }),observe:'response'
+        }), observe: 'response'
       })
-}
-
-
-
+  }
+  findMe(ip):Observable<any> {
+    return this.http.get("http://localhost:8086/web/user/findme?ip="+ip,{ observe :'response'})
+  }
 }class IP{
   ip: string;
 }

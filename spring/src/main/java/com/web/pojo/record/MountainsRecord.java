@@ -14,4 +14,5 @@ public class MountainsRecord {
     private Long altitude;
     private String url;
     private String info;
+    private String img;
 }

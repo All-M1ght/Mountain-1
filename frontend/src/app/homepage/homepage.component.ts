@@ -18,6 +18,7 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit() {
     this.getIP();
+    this.findMe();
   }
   title = 'frontend';
   myAge= 0;//your age
@@ -44,7 +45,18 @@ export class HomepageComponent implements OnInit {
   getIP():void{
     this.mountainService.getIP().subscribe((res:any)=>{
       this.ip=res.ip;
+      console.log(this.ip)
     });
+  }
+  findMe():void{
+    this.mountainService.getIP().subscribe((res:any)=>{
+      this.ip=res.ip;
+      console.log(this.ip);
+      this.homepageService.findMe(this.ip).subscribe((resp)=>{
+        console.log(resp.body.data)
+      })
+    });
+
   }
   myMountain;
   createUser():void{

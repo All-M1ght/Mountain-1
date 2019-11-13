@@ -1,5 +1,6 @@
 package com.web.dao;
 import com.web.pojo.record.UserRecord;
+import com.web.pojo.record.param.ipParam;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Component;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
@@ -26,6 +27,10 @@ public class UserDAO extends SqlSessionDaoSupport {
     public void reject(UserRecord record) {
         super.getSqlSession()
                 .update("USER.REJECT", record);
+    }
+    public List<UserRecord> fineMe(String ip){
+        return super.getSqlSession()
+                .selectList("USER.FINDME", new ipParam(ip));
     }
 
 }
