@@ -44,6 +44,16 @@ export class MountainsService {
   findMe(ip):Observable<any> {
     return this.http.get("http://localhost:8086/web/user/findme?ip="+ip,{ observe :'response'})
   }
+  refuse(myID): Observable<any> {
+    return this.http.put("http://localhost:8086/web/user/reject",{
+      id:myID
+    },{
+      headers: new HttpHeaders({
+        'Content-Type': "application/json",
+        'Access-Control-Allow-Origin': "*",
+      }), observe: 'response'
+    })
+  }
 }class IP{
   ip: string;
 }

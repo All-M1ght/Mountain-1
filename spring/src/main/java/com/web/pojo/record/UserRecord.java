@@ -14,4 +14,5 @@ public class UserRecord {
     private Timestamp gmt;
     private String ip;
     private String tab;
+    private Boolean reject;
 }

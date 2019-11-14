@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { coerceNumberProperty} from "@angular/cdk/coercion";
+import { TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,11 @@ import { coerceNumberProperty} from "@angular/cdk/coercion";
 })
 export class AppComponent {
 
-
-
+  constructor(private translate: TranslateService) {
+    translate.setDefaultLang('en');
+  }
+  useLanguage(language: string) {
+    this.translate.use(language);
+  }
 
 }

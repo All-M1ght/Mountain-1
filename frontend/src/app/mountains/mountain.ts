@@ -17,8 +17,10 @@ export class Mountain{
      name: string;
      altitude: number;
      url: string;
-     info: string;
+     info: any;
      guess: number;
      img: string;
+     slider: number;
+
 }
 

@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule} from "@angular/common/http";
+import { HttpClientModule,HttpClient} from "@angular/common/http";
 import { MatCardModule} from "@angular/material/card";
 import { MatSliderModule } from "@angular/material/slider";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -19,6 +19,9 @@ import { MatStepperModule } from "@angular/material";
 import { ReactiveFormsModule} from "@angular/forms";
 import { EndpageComponent } from './endpage/endpage.component';
 import { MatTableModule} from "@angular/material";
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
 
 @NgModule({
   declarations: [
@@ -42,10 +45,21 @@ import { MatTableModule} from "@angular/material";
     MatStepperModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatTableModule
+    MatTableModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
+
+}
+export function HttpLoaderFactory(http:HttpClient){
+  return new TranslateHttpLoader(http);
 }

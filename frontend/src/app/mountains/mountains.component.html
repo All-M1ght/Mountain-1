@@ -1,63 +1,104 @@
 
-<div *ngIf="next==true"><mat-vertical-stepper [linear]="isLinear">
+<div *ngIf="next==true"><mat-vertical-stepper >
   <mat-step *ngFor="let mountain of mountains" label="({{mountain.no+1}}/25)" [stepControl]="basicFormGroup">
    <form [formGroup]="basicFormGroup">
-     <a><img src="http://localhost:8086/static/{{mountain.img}}" alt="" style="width:500px"/></a>
-     <br>
-    <mat-form-field>
-      <input name="{{mountain.id}}" matInput placeholder="Your guess" formControlName="name" required [(ngModel)]="mountain.guess">
-    </mat-form-field>
+
+     <a style="float:left;"><img src="http://localhost:8086/static/{{mountain.img}}" alt="" style="height:300px"/></a>
+
+     <mat-slider formControlName="first" style="height: 320px;float: right"
+       class="example-margin"
+       [disabled]="disabled"
+       [invert]="invert"
+       [max]="max"
+       [min]="min"
+       [step]="step"
+       [thumbLabel]="thumbLabel"
+       [tickInterval]="tickInterval"
+       [(ngModel)]="mountain.guess"
+       [vertical]="1">
+     </mat-slider>
+     <hr>
+     <p style="float: left">{{'12'|translate}}{{mountain.guess}} M</p>
+<!--<div >-->
+      <!--<input class="slider-wrapper" type="range" name="{{mountain.id}}" min="0" max="9000" value="1000" step="1"  placeholder="Your guess" formControlName="first"-->
+              <!--[(ngModel)]="mountain.guess">-->
+     <!--<br>-->
+
+<!--</div>-->
+
      </form>
-    <button mat-button matStepperNext (click)="addData()">
-      Next Mountain
+    <br>
+    <button mat-button matStepperNext style="float: right">
+     {{'13'|translate}}
     </button>
 
   </mat-step>
 
 </mat-vertical-stepper>
-<button mat-raised-button  (click)="guessAll();changeNext()">I am finished</button>
+
+<button mat-raised-button  (click)="ifFinished()">{{'14'|translate}}</button>
 </div>
-<div *ngIf="next==false">
-  <table mat-table [dataSource]="dataAll"  style="width: 100%">
+<div *ngIf="next==false" >
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{'15'|translate}}</mat-card-title>
+      <mat-card-subtitle>{{'16'|translate}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+      {{'17'|translate}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="accept()">{{'11'|translate}}</button>
+      <button mat-button (click)="refuse()">{{'18'|translate}}</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <table mat-table [dataSource]="dataAll" style="width: 100%" >
     <ng-container matColumnDef="name" style="width: 10%">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{'19'|translate}}</mat-header-cell>
       <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="altitude" style="width: 10%">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Altitude</mat-header-cell>
-      <mat-cell *matCellDef="let row" >{{row.altitude}}</mat-cell>
+    <ng-container matColumnDef="img"  style="width: 10%">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{'20'|translate}}</mat-header-cell>
+      <mat-cell *matCellDef="let row"> <a><img src="http://localhost:8086/static/{{row.img}}" alt="" style="height:150px"/></a></mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="url" style="width: 15%">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Link</mat-header-cell>
-      <mat-cell *matCellDef="let row"><a href="{{row.url}}" target="_blank">{{row.url}}</a></mat-cell>
+    <ng-container matColumnDef="altitude" style="width: 10%">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{'21'|translate}}</mat-header-cell>
+      <mat-cell *matCellDef="let row" >{{row.altitude}} M</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="guess" style="width: 10%">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Your answer
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{'22'|translate}}
       </mat-header-cell>
-      <mat-cell *matCellDef="let row" >{{row.guess}}
+      <mat-cell *matCellDef="let row" >{{row.guess}} M
       </mat-cell>
     </ng-container>
-    <ng-container matColumnDef="color" style="width: 15%">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>WHICH IS</mat-header-cell>
+    <ng-container matColumnDef="color" style="width: 10%">
+      <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <button mat-button mat-raised-button style="color: greenyellow" *ngIf="row.color==0">close</button>
-        <button mat-button mat-raised-button style="color: red" *ngIf="row.color==1">not close</button>
-
+        <button mat-button mat-raised-button style="color: greenyellow" *ngIf="row.color==0">{{'23'|translate}}</button>
+        <button mat-button mat-raised-button style="color: red" *ngIf="row.color==1">{{'24'|translate}}</button>
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="info" style="width: 40%">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Introduction</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{row.info}}
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{'25'|translate}}</mat-header-cell>
+      <mat-cell *matCellDef="let row" style="height: 200px;overflow: auto; font-size:1px">{{row.info}}
       </mat-cell>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="['name','altitude','url','guess','color','info']"></mat-header-row>
-    <mat-row *matRowDef="let row; columns:['name','altitude','url','guess','color','info']"></mat-row>
+    <ng-container matColumnDef="url" style="width: 10%">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{'26'|translate}}</mat-header-cell>
+      <mat-cell *matCellDef="let row"><a href="{{row.url}}" target="_blank">{{'26'|translate}}</a></mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="['name','img','altitude','guess','color','info','url']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns:['name','img','altitude','guess','color','info','url']"></mat-row>
 
   </table>
-
 </div>

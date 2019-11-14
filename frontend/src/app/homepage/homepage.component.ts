@@ -39,8 +39,8 @@ export class HomepageComponent implements OnInit {
   }
   private _tickInterval = 1;
   user: User=new User();
-  myExpert: string;//how well do you know mountains
-  experts: string[] =  [ 'Little', 'Medium', 'Expert' ];
+  myExpert;//how well do you know mountains
+  expert;
   ip:string;
   getIP():void{
     this.mountainService.getIP().subscribe((res:any)=>{
@@ -62,13 +62,7 @@ export class HomepageComponent implements OnInit {
   createUser():void{
     this.user.age=this.myAge;
     this.user.ip=this.ip;
-    if(this.myExpert = 'Little'){
-      this.user.expert=0;
-    }
-    else if( this.myExpert = 'Medium'){
-      this.user.expert=1;
-    }
-    else this.user.expert=2;
+      this.user.expert=this.myExpert;
     this.user.num=this.myMountain;
     this.homepageService.createUser(this.user).subscribe((resp) =>{
       console.log(resp);

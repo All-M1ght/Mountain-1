@@ -20,6 +20,8 @@ public class UserService {
     public boolean guess(UserRecord record){
         return 1 == userDAO.guess(record);
     }
-    public void reject(UserRecord record) { userDAO.reject(record); }
+    public boolean reject(UserRecord record) {
+        return 1 == userDAO.reject(record);
+    }
     public List<UserRecord> findMe(String ip) { return userDAO.fineMe(ip); }
 }

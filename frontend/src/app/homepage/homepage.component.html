@@ -14,7 +14,7 @@
     </g>
   </svg>
 
-  <span> Welcome!
+  <span> {{'1'|translate}}
      </span>
 
 <svg id="rocket-smoke" alt="Rocket Ship Smoke" xmlns="http://www.w3.org/2000/svg" width="516.119" height="1083.632" viewBox="0 0 516.119 1083.632">
@@ -24,17 +24,17 @@
 </div>
 
 <!-- Resources -->
-<h2> Before we start, please answer 3 questions for us to know you better! </h2>
+<h2>{{'27'|translate}}</h2>
 <div>
   <mat-card>
     <mat-card-content>
-      <h2 class="example-h2">1.How old are you?</h2>
+      <h2 class="example-h2">{{'2'|translate}}</h2>
 
       <section class="example-section">
         <mat-form-field class="example-margin">
-          <input matInput type="number" placeholder="Age" [(ngModel)]="myAge" required>
+          <input matInput type="number" placeholder="{{'3'|translate}}" [(ngModel)]="myAge" required>
         </mat-form-field>
-        <h2 class="example-h2">Select your age</h2>
+        <h2 class="example-h2">{{'4'|translate}}</h2>
         <mat-slider
           class="example-margin"
           [disabled]="disabled"
@@ -53,34 +53,34 @@
 </div>
 <div>
   <mat-card>
-    <h2>2. How well do you know mountains? </h2>
+    <h2>{{'5'|translate}}</h2>
     <mat-radio-group class="example-radio-group" [(ngModel)]="myExpert">
-      <mat-radio-button class="example-radio-button" *ngFor="let expert of experts" [value]="expert">
-        {{expert}}
-      </mat-radio-button>
+      <mat-radio-button value="0">{{'6'|translate}}</mat-radio-button>
+      <mat-radio-button value="1">{{'7'|translate}}</mat-radio-button>
+      <mat-radio-button value="2">{{'8'|translate}}</mat-radio-button>
+
     </mat-radio-group>
-    <div class="example-selected-value">Your knowledge of Mountains is: {{myExpert}}</div>
+
+    <!--<div class="example-selected-value">Your knowledge of Mountains is: {{myExpert}}</div>-->
   </mat-card>
 </div>
   <div>
     <mat-card>
       <mat-card-content>
-        <h2 class="example-h2">3. How many mountains do you know?</h2>
+        <h2 class="example-h2">{{'9'|translate}}</h2>
 
         <section class="example-section">
           <mat-form-field class="example-margin">
-            <input matInput type="number" placeholder="Number" [(ngModel)]="myMountain" required>
+            <input matInput type="number" placeholder="Num" [(ngModel)]="myMountain" required>
           </mat-form-field>
         </section>
       </mat-card-content>
     </mat-card>
   </div>
 
-<div class="example-button-row">
-  <h2>Are you ready for all the questions?</h2>
-  <button mat-fab color="primary" routerLink="/mountains" (click)="createUser()"  >Yes</button>
-
-
+<div class="example-button-row" >
+  <h2>{{'10'|translate}}</h2>
+  <button mat-fab color="primary" routerLink="/mountains" (click)="createUser()" style="float: right" >{{'11'|translate}}</button>
 </div>
 </div>
 <router-outlet></router-outlet>

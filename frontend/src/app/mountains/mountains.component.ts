@@ -3,6 +3,8 @@ import { Resps, Mountain } from "./mountain";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import { MountainsService } from "./mountains.service";
 import {MatTableDataSource} from "@angular/material";
+import {coerceNumberProperty} from "@angular/cdk/coercion";
+import {register} from "ts-node";
 
 @Component({
   selector: 'app-mountains',
@@ -15,9 +17,23 @@ export class MountainsComponent implements OnInit {
     private mountainsService: MountainsService
   ) {
     this.basicFormGroup = new FormGroup({
-      name: new FormControl('', Validators.required)
+      first: new FormControl(0, Validators.required,),
+      second: new FormControl(0, Validators.required )
     })
   }
+
+  autoTicks = true;
+  disabled = false;
+  invert = false;
+  max = 9000;
+  min = 0;
+  showTicks = true;
+  step = 1;
+  thumbLabel = true;
+  get tickInterval(): number | 'auto' {
+    return this.showTicks ? (this.autoTicks ? 'auto' : this._tickInterval) : 0;
+  }
+  private _tickInterval = 1;
   ip:string;
   ngOnInit() {
     this.getMountains();
@@ -33,10 +49,13 @@ export class MountainsComponent implements OnInit {
   no:number=0;
   basicFormGroup: FormGroup;
   guess;
+  slider;
   ids=[];
   resps = new Resps();
   dataAll = new MatTableDataSource<any>();
-
+  try1():void{
+    console.log(this.mountains)
+  }
   getMountains():void{
     this.mountainsService.getMountains().subscribe((resp)=>{
       console.log(resp);
@@ -63,14 +82,33 @@ export class MountainsComponent implements OnInit {
   changeNext():void{
     this.next=false;
   }
+  test1(index):void{
+    console.log(index);
+    this.mountains[index].guess=this.mountains[index].slider;
+    console.log(this.mountains)
+  }
   myGuess;
   myID;
   myIP;
   id;
-  addData():void{
 
-  }
   allGuess=[];
+  checkOne=0;
+  ifFinished():void{
+    for( let i=0;i<3;i++){
+      if(this.mountains[i].guess>0){
+        this.checkOne=this.checkOne+1;
+      }
+    }
+    console.log(this.checkOne)
+    if(this.checkOne==3){
+      this.guessAll();
+      this.changeNext();
+    }
+    else{
+      alert('Please finish all your questions!')
+    }
+  }
   guessAll():void{
     this.myGuess=this.ids[0]+":"+this.mountains[0].guess;
     for( let i=1;i<3;i++){
@@ -96,6 +134,20 @@ export class MountainsComponent implements OnInit {
       })
     });
 
+  }
+  accept():void{
+    alert("Thank you a lot for your time!")
+  }
+  refuse():void{
+    alert("We are sorry to hear that, thank you!");
+    this.mountainsService.findMe(this.ip).subscribe((resp)=>{
+      this.allGuess=resp.body.data;
+      console.log(this.allGuess[this.allGuess.length-1].id);
+      this.id=this.allGuess[this.allGuess.length-1].id;
+      this.mountainsService.refuse(this.id).subscribe((resp)=>{
+        console.log(resp)
+      })
+    });
   }
 
 

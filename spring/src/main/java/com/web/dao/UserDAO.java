@@ -24,8 +24,8 @@ public class UserDAO extends SqlSessionDaoSupport {
         return super.getSqlSession()
                 .update("USER.GUESS", record);
     }
-    public void reject(UserRecord record) {
-        super.getSqlSession()
+    public int reject(UserRecord record) {
+        return super.getSqlSession()
                 .update("USER.REJECT", record);
     }
     public List<UserRecord> fineMe(String ip){

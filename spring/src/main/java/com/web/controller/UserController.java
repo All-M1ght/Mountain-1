@@ -61,6 +61,25 @@ public class UserController {
 
     }
 
+    @RequestMapping(method = RequestMethod.PUT,path = "reject")
+    public GeneralRes reject(
+            @RequestBody UserRecord record
+
+    ) {
+        try {
+            boolean reject = this.userService.reject(record);
+
+            return GeneralRes.builder().success(reject).build();
+        } catch (Throwable t) {
+
+            return GeneralRes.builder()
+                    .success(false)
+                    .message(t.getMessage())
+                    .build();
+        }
+
+    }
+
     @RequestMapping(method = RequestMethod.GET, path = "findme")
     public GeneralRes findMe(@RequestParam String ip){
         try{

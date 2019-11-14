@@ -11,6 +11,7 @@
         <result property="gmt" column="gmt"/>
         <result property="ip" column="ip"/>
         <result property="tab" column="tab"/>
+        <result property="reject" column="reject"/>
     </resultMap>
 
     <update id="CREATE" parameterType="com.web.pojo.record.UserRecord">
@@ -27,5 +28,10 @@
         FROM user
         WHERE ip = #{ip}
     </select>
+    <update id="REJECT" parameterType="com.web.pojo.record.UserRecord">
+        UPDATE user
+        SET reject=true
+        WHERE id = ${id}
+    </update>
 
 </mapper>
